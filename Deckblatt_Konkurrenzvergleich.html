@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Deckblatt: Konkurrenzvergleich</title>
+<style>
+  body {font-family:Arial; font-size:11pt}
+  table  {border-collapse: collapse;}
+  tr, td, th {border:1px solid #bbb}
+.rowhead {padding:3px;padding-right:6px; font-weight:bold; font-size:12pt;}
+.datacol {width:4.6em; font-size:10.5pt;}
+.colgrphead {background-color:#eee}
+.rownr {font-weight:normal;text-align:right;padding-right:2px;}
+.datacell {text-align:right}
+code {color:#852}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+<div id="infodiv">
+  <h1>Leeres Template für das Deckblatt Konkurrenzvergleich des Monatsreports</h1>
+  <p>Die Variable <code>data</code> muss mit dem Output von <code>perl/konkurrenzvergleich_html.pl > tmp.txt</code> aktualisiert werden.</p>
+</div>
+<button id="btn">Data!</button>
+<table id="maintable">
+<thead>
+<tr><td>&nbsp;</td><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th><th>M</th><th>N</th></tr>
+<tr><th class="rownr">1</th><th>&nbsp;</th><th>&nbsp;</th><th class="colgrphead" colspan="3">Unique Clients</th><th class="colgrphead" colspan="3">Visits</th><th class="colgrphead" colspan="3">Page Impressionss</th><th>&nbsp;</th><th class="colgrphead" colspan="2">Ratios</th></tr>
+<tr><th class="rownr">2</th><th>&nbsp;</th><th>&nbsp;</th><th class="datacol">2016</th><th class="datacol">2017</th><th class="datacol">%YOY</th><th class="datacol">2016</th><th class="datacol">2017</th><th class="datacol">%YOY</th><th class="datacol">2016</th><th class="datacol">2017</th><th class="datacol">%YOY</th><th>&nbsp;</th><th class="datacol">Visits/UC</th><th class="datacol">PIs/Visit</th></tr>
+</thead>
+<tbody>
+<tr><td class="rownr">6</td><td class="x">&nbsp;</td><td class="rowhead">20 min</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">7</td><td class="x">&nbsp;</td><td class="rowhead">Blick</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">8</td><td class="x">&nbsp;</td><td class="rowhead">Neue Zürcher Zeitung</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">9</td><td class="x">&nbsp;</td><td class="rowhead">NZZ Netz</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">10</td><td class="x">&nbsp;</td><td class="rowhead">Tagesanzeiger</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">11</td><td class="x">&nbsp;</td><td class="rowhead">Newsnet DCH</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">12</td><td class="x">&nbsp;</td><td class="rowhead">Watson</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">13</td><td class="x">&nbsp;</td><td class="rowhead">az Nordwestschweiz</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">14</td><td class="x">&nbsp;</td><td class="rowhead">BAZ</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">15</td><td class="x">&nbsp;</td><td class="rowhead">Neue Luzerner Zeitung</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">16</td><td class="x">&nbsp;</td><td class="rowhead">St. Galler Tagblatt</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">17</td><td class="x">&nbsp;</td><td class="rowhead">Zürichsee-Zeitung</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">18</td><td class="x">&nbsp;</td><td class="rowhead">Zürcher Unterländerd</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">19</td><td class="x">&nbsp;</td><td class="rowhead">Der Landbote</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">23</td><td class="x">&nbsp;</td><td class="rowhead">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">24</td><td class="x">&nbsp;</td><td class="rowhead">familienleben.ch</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">25</td><td class="x">&nbsp;</td><td class="rowhead">swissmom.ch</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">26</td><td class="x">&nbsp;</td><td class="rowhead">Wir Eltern</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">27</td><td class="x">&nbsp;</td><td class="rowhead">Wildeisen's Kochen</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">28</td><td class="x">&nbsp;</td><td class="rowhead">saison.ch</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">29</td><td class="x">&nbsp;</td><td class="rowhead">lemenu.chd</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">30</td><td class="x">&nbsp;</td><td class="rowhead">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">34</td><td class="x">&nbsp;</td><td class="rowhead">TeleBärn</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">35</td><td class="x">&nbsp;</td><td class="rowhead">TeleM1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">36</td><td class="x">&nbsp;</td><td class="rowhead">TeleZüri</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">37</td><td class="x">&nbsp;</td><td class="rowhead">TV24</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">20</td><td class="x">&nbsp;</td><td class="rowhead">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">41</td><td class="x">&nbsp;</td><td class="rowhead">Radio 24</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">42</td><td class="x">&nbsp;</td><td class="rowhead">Radio Argovia</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">43</td><td class="x">&nbsp;</td><td class="rowhead">Energy.ch</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">44</td><td class="x">&nbsp;</td><td class="rowhead">Radio Pilatus</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">45</td><td class="x">&nbsp;</td><td class="rowhead">FM1 Today</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">20</td><td class="x">&nbsp;</td><td class="rowhead">&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+<tr><td class="rownr">47</td><td class="x">&nbsp;</td><td class="rowhead">a-z Jobs</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td></td><td></td></tr>
+</tbody>
+</table>
+<script>
+  var data = {
+     "B6" : "20 min",
+     "I6" : "841171201",
+     "J6" : "926531485",
+     "K6" : "10.15%",
+     "C6" : "4493000",
+     "D6" : "4783000",
+     "E6" : "6.45%",
+     "F6" : "77895356",
+     "G6" : "88034301",
+     "H6" : "13.02%",
+     "B42" : "Argovia",
+     "I42" : "261332",
+     "J42" : "666010",
+     "K42" : "154.85%",
+     "C42" : "35000",
+     "D42" : "55000",
+     "E42" : "57.14%",
+     "F42" : "117430",
+     "G42" : "207218",
+     "H42" : "76.46%",
+     "B14" : "BAZ",
+     "I14" : "21462068",
+     "J14" : "20159049",
+     "K14" : "-6.07%",
+     "C14" : "478000",
+     "D14" : "710000",
+     "E14" : "48.54%",
+     "F14" : "3994700",
+     "G14" : "4280954",
+     "H14" : "7.17%",
+     "B7" : "Blick",
+     "I7" : "790260112",
+     "" : "-100.00%",
+     "C7" : "4678000",
+     "" : "-100.00%",
+     "F7" : "60026709",
+     "" : "-100.00%",
+     "B19" : "Der Landbote",
+     "I19" : "424766",
+     "J19" : "713694",
+     "K19" : "68.02%",
+     "C19" : "77000",
+     "D19" : "93000",
+     "E19" : "20.78%",
+     "F19" : "161293",
+     "G19" : "231509",
+     "H19" : "43.53%",
+     "B43" : "Energy.ch",
+     "I43" : "8899646",
+     "J43" : "16023311",
+     "K43" : "80.04%",
+     "C43" : "296000",
+     "D43" : "320000",
+     "E43" : "8.11%",
+     "F43" : "1836563",
+     "G43" : "1856098",
+     "H43" : "1.06%",
+     "B45" : "FM1 Today",
+     "I45" : "2944903",
+     "J45" : "5330072",
+     "K45" : "80.99%",
+     "C45" : "181000",
+     "D45" : "218000",
+     "E45" : "20.44%",
+     "F45" : "633999",
+     "G45" : "1162233",
+     "H45" : "83.32%",
+     "B9" : "NZZ-Netz",
+     "I9" : "89408339",
+     "J9" : "110045172",
+     "K9" : "23.08%",
+     "C9" : "3800000",
+     "D9" : "4560000",
+     "E9" : "20.00%",
+     "F9" : "20399635",
+     "G9" : "25856990",
+     "H9" : "26.75%",
+     "B15" : "Neue Luzerner Zeitung",
+     "I15" : "12321458",
+     "J15" : "13696085",
+     "K15" : "11.16%",
+     "C15" : "539000",
+     "D15" : "741000",
+     "E15" : "37.48%",
+     "F15" : "2878423",
+     "G15" : "3807960",
+     "H15" : "32.29%",
+     "B8" : "Neue Zuercher Zeitung",
+     "I8" : "38490375",
+     "J8" : "45844028",
+     "K8" : "19.11%",
+     "C8" : "2268000",
+     "D8" : "2978000",
+     "E8" : "31.31%",
+     "F8" : "10602526",
+     "G8" : "13401179",
+     "H8" : "26.40%",
+     "B11" : "Newsnet DCH",
+     "I11" : "126349317",
+     "J11" : "105368701",
+     "K11" : "-16.61%",
+     "C11" : "3060000",
+     "D11" : "3084000",
+     "E11" : "0.78%",
+     "F11" : "25441131",
+     "G11" : "21638816",
+     "H11" : "-14.95%",
+     "B41" : "Radio 24",
+     "I41" : "365403",
+     "J41" : "653653",
+     "K41" : "78.89%",
+     "C41" : "37000",
+     "D41" : "46000",
+     "E41" : "24.32%",
+     "F41" : "141089",
+     "G41" : "187777",
+     "H41" : "33.09%",
+     "B44" : "Radio Pilatus",
+     "I44" : "464489",
+     "J44" : "723818",
+     "K44" : "55.83%",
+     "C44" : "117000",
+     "D44" : "130000",
+     "E44" : "11.11%",
+     "F44" : "267979",
+     "G44" : "315211",
+     "H44" : "17.63%",
+     "B16" : "St. Galler Tagblatt",
+     "I16" : "9732771",
+     "J16" : "13552590",
+     "K16" : "39.25%",
+     "C16" : "531000",
+     "D16" : "667000",
+     "E16" : "25.61%",
+     "F16" : "2102804",
+     "G16" : "2585492",
+     "H16" : "22.95%",
+     "B37" : "TV24",
+     "I37" : "40965",
+     "J37" : "28906",
+     "K37" : "-29.44%",
+     "C37" : "12000",
+     "D37" : "7000",
+     "E37" : "-41.67%",
+     "F37" : "16279",
+     "G37" : "11335",
+     "H37" : "-30.37%",
+     "B10" : "Tagesanzeiger",
+     "I10" : "78483498",
+     "J10" : "62772575",
+     "K10" : "-20.02%",
+     "C10" : "2199000",
+     "D10" : "2056000",
+     "E10" : "-6.50%",
+     "F10" : "16811803",
+     "G10" : "13410588",
+     "H10" : "-20.23%",
+     "B34" : "TeleBaern",
+     "I34" : "151653",
+     "J34" : "106282",
+     "K34" : "-29.92%",
+     "C34" : "45000",
+     "D34" : "32000",
+     "E34" : "-28.89%",
+     "F34" : "66747",
+     "G34" : "51026",
+     "H34" : "-23.55%",
+     "B35" : "TeleM1",
+     "I35" : "145392",
+     "J35" : "126218",
+     "K35" : "-13.19%",
+     "C35" : "39000",
+     "D35" : "39000",
+     "E35" : "0.00%",
+     "F35" : "65924",
+     "G35" : "64718",
+     "H35" : "-1.83%",
+     "B36" : "TeleZueri",
+     "I36" : "457604",
+     "J36" : "537156",
+     "K36" : "17.38%",
+     "C36" : "89000",
+     "D36" : "114000",
+     "E36" : "28.09%",
+     "F36" : "196246",
+     "G36" : "237390",
+     "H36" : "20.97%",
+     "B12" : "Watson",
+     "I12" : "85206963",
+     "J12" : "74727747",
+     "K12" : "-12.30%",
+     "C12" : "1159000",
+     "D12" : "1326000",
+     "E12" : "14.41%",
+     "F12" : "8542951",
+     "G12" : "9832473",
+     "H12" : "15.09%",
+     "B27" : "Wildeisen's Kochen",
+     "I27" : "2149997",
+     "J27" : "2637466",
+     "K27" : "22.67%",
+     "C27" : "329000",
+     "D27" : "477000",
+     "E27" : "44.98%",
+     "F27" : "635904",
+     "G27" : "912852",
+     "H27" : "43.55%",
+     "B26" : "Wir Eltern",
+     "I26" : "360453",
+     "J26" : "1021661",
+     "K26" : "183.44%",
+     "C26" : "123000",
+     "D26" : "212000",
+     "E26" : "72.36%",
+     "F26" : "166099",
+     "G26" : "302118",
+     "H26" : "81.89%",
+     "B17" : "ZSZ",
+     "I17" : "375997",
+     "J17" : "567789",
+     "K17" : "51.01%",
+     "C17" : "64000",
+     "D17" : "77000",
+     "E17" : "20.31%",
+     "F17" : "142827",
+     "G17" : "184666",
+     "H17" : "29.29%",
+     "B18" : "Zuonline",
+     "I18" : "222607",
+     "J18" : "287629",
+     "K18" : "29.21%",
+     "C18" : "53000",
+     "D18" : "48000",
+     "E18" : "-9.43%",
+     "F18" : "101586",
+     "G18" : "103185",
+     "H18" : "1.57%",
+     "B13" : "az Nordwestschweiz",
+     "I13" : "25918832",
+     "J13" : "28754541",
+     "K13" : "10.94%",
+     "C13" : "1178000",
+     "D13" : "996000",
+     "E13" : "-15.45%",
+     "F13" : "5037968",
+     "G13" : "4868925",
+     "H13" : "-3.36%",
+     "B24" : "familienleben.ch",
+     "I24" : "930513",
+     "J24" : "860282",
+     "K24" : "-7.55%",
+     "C24" : "312000",
+     "D24" : "293000",
+     "E24" : "-6.09%",
+     "F24" : "448206",
+     "G24" : "406483",
+     "H24" : "-9.31%",
+     "B29" : "lemenu.ch",
+     "I29" : "212413",
+     "" : "-100.00%",
+     "C29" : "30000",
+     "" : "-100.00%",
+     "F29" : "49534",
+     "" : "-100.00%",
+     "B28" : "saison.ch",
+     "I28" : "1114332",
+     "" : "-100.00%",
+     "C28" : "407000",
+     "" : "-100.00%",
+     "F28" : "610853",
+     "" : "-100.00%",
+     "B25" : "swissmom.ch",
+     "I25" : "2868200",
+     "J25" : "3356428",
+     "K25" : "17.02%",
+     "C25" : "298000",
+     "D25" : "406000",
+     "E25" : "36.24%",
+     "F25" : "807513",
+     "G25" : "1036709",
+     "H25" : "28.38%",
+     "M6" : "18.41",
+     "N6" : "10.52",
+     "M42" : "3.77",
+     "N42" : "3.21",
+     "M14" : "6.03",
+     "N14" : "4.71",
+     "M7" : "-",
+     "N7" : "-",
+     "M19" : "2.49",
+     "N19" : "3.08",
+     "M43" : "5.80",
+     "N43" : "8.63",
+     "M45" : "5.33",
+     "N45" : "4.59",
+     "M9" : "5.67",
+     "N9" : "4.26",
+     "M15" : "5.14",
+     "N15" : "3.60",
+     "M8" : "4.50",
+     "N8" : "3.42",
+     "M11" : "7.02",
+     "N11" : "4.87",
+     "M41" : "4.08",
+     "N41" : "3.48",
+     "M44" : "2.42",
+     "N44" : "2.30",
+     "M16" : "3.88",
+     "N16" : "5.24",
+     "M37" : "1.62",
+     "N37" : "2.55",
+     "M10" : "6.52",
+     "N10" : "4.68",
+     "M34" : "1.59",
+     "N34" : "2.08",
+     "M35" : "1.66",
+     "N35" : "1.95",
+     "M36" : "2.08",
+     "N36" : "2.26",
+     "M12" : "7.42",
+     "N12" : "7.60",
+     "M27" : "1.91",
+     "N27" : "2.89",
+     "M26" : "1.43",
+     "N26" : "3.38",
+     "M17" : "2.40",
+     "N17" : "3.07",
+     "M18" : "2.15",
+     "N18" : "2.79",
+     "M13" : "4.89",
+     "N13" : "5.91",
+     "M24" : "1.39",
+     "N24" : "2.12",
+     "M29" : "-",
+     "N29" : "-",
+     "M28" : "-",
+     "N28" : "-",
+     "M25" : "2.55",
+     "N25" : "3.24"
+  };
+  var colIndex = {
+     "0" : "Row",
+     "1" : "A",
+     "2" : "B",
+     "3" : "C",
+     "4" : "D",
+     "5" : "E",
+     "6" : "F",
+     "7" : "G",
+     "8" : "H",
+     "9" : "I",
+     "10" : "J",
+     "11" : "K",
+     "12" : "L",
+     "13" : "M",
+     "14" : "N",
+  };
+  $("document").ready(function() {
+    $("#maintable > tbody > tr > td").each(function() {
+	   //console.log($(this).index(),colIndex[$(this).index()]);
+	   $(this).attr("id",colIndex[$(this).index()]+$(this).parent().find("td.rownr").text());
+	   if ($(this).index()>2) {$(this).addClass("datacell");};
+	});
+	$("#btn").click(function() {
+	  for (var d in data) {
+	     console.log(d);
+	     $("#"+d).text(data[d])
+	  };
+	});
+  });
+</script>
+</body>
+</html>

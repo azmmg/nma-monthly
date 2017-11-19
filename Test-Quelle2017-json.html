@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<title>File Reader QUELLE</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<style>
+	 body {font-family:Arial,sans-serif;padding:1em;}
+	 .numeric {text-align:right}
+	 th {text-align:center;font-weight:bold;padding:.2em}
+	 table {border-collapse: collapse;}
+     table, th, td {border: 1px solid black;}
+	 td {padding:2px}
+	 pre {font-family:"Courier New", Courier}
+	 #infodiv {margin:1em}
+	 .warn {background-color:#fdd}
+	</style>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="js/Test-Quelle2017-json.js"></script>
+  </head>
+  <body>
+  <div id="infodiv">
+      Zum Testen ob der <a href="Quelle2017.json">JSON-Output</a> von <a href="filereader-QUELLE-.html">filereader-QUELLE-.html</a> wohlgeformt ist.
+  </div>
+  <div>
+     <ul id="main">
+	 </ul>
+  </div>
+  <script>
+    $("#document").ready(function(){
+	   for (var e in allData) {
+	      $("#main").append('<li>'+allData[e][Object.keys(allData[e])[0]]+'</li>')
+	   }
+	});
+  </script>
+  </body>
+</html>

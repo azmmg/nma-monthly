@@ -1,0 +1,144 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="iso-8859-1">
+	<title>Javascript Text File Reader</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/nm-monthly.css">
+	<style>
+	  tr:hover {background-color:#39FF14}
+	</style>
+  </head>
+  <body>
+  <div id="infodiv">
+  <form id="myForm">
+  <input type="radio" name="numberlength" value="short"> short<br>
+  <input type="radio" name="numberlength" value="long" checked="checked"> long
+  <br><br>
+  <input type="file" name="file" id="file">
+  </form>
+  <p style="margin-top:1em">Dieses Skript liest aus dem CSV-File von <a href="http://netreport.net-metrix.ch/audit/">Net-Metrix Audit</a> die f&uuml;r den AZ-Monatsreport
+  relevanten Eintr&auml;ge heraus und stellt sie tabellarisch dar. Ganzzahlige Werte k&ouml;nnen lang oder in Millionen, auf zwei Nachkommastellen gerundet, angezeigt werden.
+  <br>
+  <em>Wichtig:</em> Auf den Monat des CSV-Files achten!
+  </p>
+  </div>
+  <table id="mainTable">
+    <thead><tr><th colspan="8" id="datumsfeld">Monat Jahr</th></tr></thead>
+	<tbody></tbody>
+  </table>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="js/jquery.csv-0.71.js"></script>
+  <script src="js/nm-utility-functions.js"></script>
+  <script src="js/underscore-min.js"></script>
+  <script>
+  var accumulator = [];
+  // Der Inhalt von nmNames ist auch online via https://api.myjson.com/bins/eocfb abrufbar
+  var nmNames = {
+'20min.ch - D-CH' : "B1",
+'Blick Online' : "B1",
+'Bluewin' : "B1",
+'Neue Zuercher Zeitung' : "B1",
+'Neue Zürcher Zeitung' : "B1",
+'NZZ-Netz' : "B1",
+'tagesanzeiger.ch' : "B1",
+'Newsnet DCH' : "B1",
+'Newsnet D-CH' : "B1",
+'watson.ch' : "B1",
+'Nordwestschweiz Netz' : "B0",
+'baslerzeitung.ch' : "B1",
+'Luzerner Zeitung' : "B1",
+'luzernerzeitung.ch' : "B1",
+'srf.ch' : "B1",
+'St. Galler Tagblatt' : "B1",
+'zsz.ch' : "B1",
+'zuonline.ch' : "B1",
+'Der Landbote' : "B1",
+'swissmom.ch' : "B0",
+'familienleben.ch' : "B2",
+'wireltern.ch' : "B0",
+'wildeisen.ch' : "B0",
+'saison.ch' : "B3",
+'lemenu.ch' : "B3",
+'tageswoche.ch' : "B1",
+'telezueri.ch' : "B0",
+'argovia.ch' : "B0",
+'radio24.ch' : "B0",
+'radiopilatus.ch' : "B5",
+'energy.ch' : "B5",
+'FM1Today' : "B5",
+'TeleBaern.tv' : "B0",
+'TeleM1.ch' : "B0",
+'tv24.ch' : "B0"
+};
+    //var firstField = 'Websites Angebot';
+    var firstField = 'Webangebote Angebot'; // ab 2016-09
+	function benchMark(p,tbl) {
+        return tbl[p];
+    };
+    const QUELLE = 'Net-Metrix Audit', JAHR = 2017, MONAT = 'Oktober';
+	function wrapTR(arr) {
+       return '<tr>'+arr.map(function(x){var cls=($.isNumeric(x) || x.match(/[0-9]?[0-9]:[0-9][0-9]:[0-9][0-9]/))?'numeric':'text';return '<td class="'+cls+'">'+x+'</td>';})+'</tr>';
+    };
+	function wrapTD(str,cssClass) {
+	   return (typeof(cssClass) == 'undefined') ? '<td>'+str+'</td>' : '<td class="'+cssClass+'">'+str+'</td>';
+	};
+	function createObj(z1,z2,z3,z4,z5,benchmark) {
+	    obj = {};
+		obj[z1] = [["Unique Clients", z1, QUELLE, JAHR, MONAT, benchmark, "IST", z2],
+		["Visits", z1, QUELLE, JAHR, MONAT, benchmark, "IST", z3],
+		["Page Impressions", z1, QUELLE, JAHR, MONAT, benchmark, "IST", z5],
+		["Nutzungsdauer", z1, QUELLE, JAHR, MONAT, benchmark, "IST", z4]];
+		return obj;
+    };
+	function determineLength(zahl,modus) {
+	    return (modus == 'short') ? runde(zahl) : zahl;
+	};
+	var fields = [firstField, 'Unique Clients', 'Visits', 'CH-Visits', 'Use Time', 'Page Impressions'];
+	/*
+	myHeadRow = $("<tr></tr>");
+	for (var f in fields) {
+	    myHeadRow.append('<th>'+fields[f]+'</th>');
+	}
+	$("#mainTable > thead").append(myHeadRow);*/
+	$("#mainTable > thead").append('<tr><th>Dimension</th><th>Portal</th><th>Quelle</th><th>Jahr</th><th>Monat</th><th>Benchmark</th><th>Soll/Ist</th><th>Wert</th></tr>');
+	$("#datumsfeld").html('Net-Metrix Audit Oktober 2017');
+	$("#document").ready(function(){
+	  //$("tr").mouseover(function(){});
+      document.getElementById('file').onchange = function(){
+        var numberLength = $('input[name=numberlength]:checked', '#myForm').val();
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(progressEvent){
+	      var parsedResult = $.csv.toObjects(this.result);
+	      for(var ln in parsedResult) {
+		     if (typeof nmNames[parsedResult[ln][firstField]] != "undefined") {
+			    zelle1 = parsedResult[ln][firstField];
+				zelle2 = determineLength(parsedResult[ln]['Unique Clients'],numberLength);
+				zelle3 = determineLength(parsedResult[ln]['Visits'],numberLength);
+				zelle4 = parsedResult[ln]['CH-Visits'];
+				zelle5 = parsedResult[ln]['Use Time'];
+				zelle6 = determineLength(parsedResult[ln]['Page Impressions'],numberLength);
+				if (parsedResult[ln][firstField] == 'Newsnet DCH' ||parsedResult[ln][firstField] == 'Newsnet D-CH' || parsedResult[ln][firstField] == 'NZZ-Netz') {
+				   zelle6 = determineLength(zelle4,numberLength); zelle4 = '&nbsp;&mdash;&nbsp;'; zelle5 = zelle4;
+				}
+				//$("#mainTable > tbody").append('<tr>'+wrapTD(zelle1)+wrapTD(zelle2,'numeric')+wrapTD(zelle3,'numeric')+wrapTD(zelle4,'numeric')+wrapTD(zelle5,'numeric')+wrapTD(zelle6,'numeric')+'</tr>');
+				var portal = zelle1, benchmark = benchMark(portal,nmNames);
+				accumulator.push(createObj(zelle1,zelle2,zelle3,zelle5,zelle6,benchmark));
+		     };
+          };
+		  console.log(accumulator);
+		  for (var a in accumulator) {
+		      for (var i=0;i<4;i++)
+		       //console.log(accumulator[a][Object.keys(accumulator[a])[0]][i]);
+		      $("#mainTable > tbody").append(wrapTR(accumulator[a][Object.keys(accumulator[a])[0]][i]));
+		  };
+	    };
+        reader.readAsText(file);
+        $("#infodiv").remove();
+	  };
+	});
+  </script>
+  </body>
+</html>

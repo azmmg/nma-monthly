@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<title>File Reader QUELLE</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<style>
+	 body {font-family:Arial,sans-serif;padding:1em;}
+	 .numeric {text-align:right}
+	 th {text-align:center;font-weight:bold;padding:.2em}
+	 table {border-collapse: collapse;}
+     table, th, td {border: 1px solid black;}
+	 td {padding:2px}
+	 pre {font-family:"Courier New", Courier}
+	 #infodiv {margin:1em}
+	 .warn {background-color:#fdd}
+	</style>
+  </head>
+  <body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="jquery.csv-0.71.js"></script>
+  <script src="jquery.tablesorter.min.js"></script>
+  <script src="underscore-min.js"></script>
+  <div><input type="file" name="file" id="file"></div>
+  <div style="margin-bottom:12px"><button id="makeTableButton">Make Table Sortable</button></div>
+<div id="infodiv">
+  
+  <h3>CSV-Daten</h3>
+  <pre>
+Kennzahl,Portal,Quelle,Jahr,Monat,Benchmark,IstSoll,Wert
+Unique Clients,az Nordwestschweiz,Net-Metrix Audit,2017,Januar,B0,IST,1104079
+Visits,az Nordwestschweiz,Net-Metrix Audit,2017,Januar,B0,IST,5001417
+  </pre>
+  <h3>JSON-Datenstruktur</h3>
+  <div><a href="https://api.myjson.com/bins/19qrgr">api.myjson.com/bins/19qrgr</a></div>
+ </div>
+  <table id="mainTable" class="tablesorter">
+    <thead><tr><th>Kennzahl</th><th>Portal</th><th>Quelle</th><th>Jahr</th><th>Monat</th><th>Benchmark</th><th>IstSoll</th><th>Wert</th></tr></thead>
+    <tbody></tbody>
+  </table>
+<script>
+function wrapTR(arr) {
+   return '<tr>'+arr.map(function(x){var cls=($.isNumeric(x) || x.match(/[0-9][0-9]:[0-9][0-9]:[0-9][0-9]/))?'numeric':'text';return '<td class="'+cls+'">'+x+'</td>';})+'</tr>';
+};
+function rename(str) {
+   var trlTbl = {"LIVE" : "Apps","EPAPER" : "E-Paper", "WEB" : "Web"};
+   return trlTbl[str];
+};
+
+function obj2array(obj) {
+   return [obj["measure"]["dimension"],obj["entity"],obj["meta"]["source"],obj["temporal"]["year"],obj["temporal"]["month"],obj["meta"]["benchmark"],obj["meta"]["type"],obj["measure"]["value"]];
+};
+
+$("document").ready(function() {
+document.getElementById('file').onchange = function(){
+  var file = this.files[0];
+  var reader = new FileReader();
+  reader.onload = function(progressEvent){
+    var currentdate = new Date();
+	var parsedResult = $.csv.toObjects(this.result);
+	var allData=[];
+	for(var ln in parsedResult) { // Beginn Abarbeitung der Zeilen
+	   var dataRecord = {
+           "entity" : parsedResult[ln]["Portal"],
+		   "measure" : {"dimension" : parsedResult[ln]["Kennzahl"], "value" : parsedResult[ln]["Wert"]},
+		   "temporal" : {"month" : parsedResult[ln]["Monat"], "year" : parsedResult[ln]["Jahr"]},
+		   "meta" : {"source" : parsedResult[ln]["Quelle"], "benchmark" : parsedResult[ln]["Benchmark"], "type" : parsedResult[ln]["IstSoll"]}
+	   };
+	   //console.log(dataRecord);
+	   allData.push(dataRecord);
+	   // Untenstehende Zeile entkommentieren, wenn die Daten als HTML-Tabelle ausgegeben werden sollen.
+	   //$("#mainTable").append(wrapTR(obj2array(dataRecord)));
+	};
+	// Untenstehende Zeilen entkommentieren, wenn die Daten als JSON ausgegeben werden sollen.
+	$("body").append('<div>'+JSON.stringify(allData)+'</div>');
+	$("#mainTable").remove();
+	$("#file").remove();
+	$("#makeTableButton").remove();
+	// -- Ende zu kommentierender Block
+  };
+  reader.readAsText(file);
+  $("#infodiv").hide();
+  $("#makeTableButton").click(function(){
+     $("#mainTable").tablesorter();
+     $(this).remove();
+	 // Untenstehende Zeile entkommentieren, wenn überprüft werden soll, ob die Spalte "Wert" nur numerische Werte bzw. hh:mm:ss-formatierte Werte enthält 
+	 //$("#mainTable > tbody > tr > td:nth-child(8)").each(function(){if ($(this).attr("class") != 'numeric') $(this).addClass("warn");});
+  });
+};
+});
+</script>
+</body>
+</html>

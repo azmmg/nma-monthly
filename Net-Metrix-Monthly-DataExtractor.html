@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="iso-8859-1">
+	<title>Javascript Text File Reader</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/nm-monthly.css">
+	<style>
+	  em {font-size:120%;font-weight:bold;color:red}
+	</style>
+  </head>
+  <body>
+  <div id="infodiv">
+  <form id="myForm">
+  <input type="radio" name="numberlength" value="short"> short<br>
+  <input type="radio" name="numberlength" value="long" checked="checked"> long
+  <br><br>
+  <input type="file" name="file" id="file">
+  </form>
+  <p style="margin-top:1em">Dieses Skript liest aus dem CSV-File von <a href="http://netreport.net-metrix.ch/audit/">Net-Metrix Audit</a> die f&uuml;r den AZ-Monatsreport
+  relevanten Eintr&auml;ge heraus und stellt sie tabellarisch dar. Ganzzahlige Werte k&ouml;nnen lang oder in Millionen, auf zwei Nachkommastellen gerundet, angezeigt werden.
+  <br>
+  <em>Sehr wichtig:</em> Vorjahresfile nach <code>Vorjahr.csv</code> kopieren und Semikola durch Kommata ersetzen. Jahresfile entsprechend.<br>
+  <em>Wichtig:</em> Gegebenenfalls '  ' durch '  -  ' ersetzen!<br>
+  <em>Wichtig:</em> Auf den Monat des CSV-Files achten!
+  </p>
+  </div>
+  <table id="mainTable">
+    <thead><tr><th colspan="8" id="datumsfeld">Monat Jahr</th></tr></thead>
+	<tbody></tbody>
+  </table>
+  <script src="/~mike/js/jquery-3.1.1.min.js"></script>
+  <script src="js/jquery.csv-0.71.js"></script>
+  <script src="js/nm-utility-functions.js"></script>
+  <script src="js/nm-names.js"></script>
+  <script>
+        //var firstField = 'Websites Angebot';
+        var firstField = 'Webangebote Angebot'; // ab 2016-09
+	function wrapTD(str,cssClass) {
+	   return (typeof(cssClass) == 'undefined') ? '<td>'+str+'</td>' : '<td class="'+cssClass+'">'+str+'</td>';
+	};
+	
+	function determineLength(zahl,modus) {
+	    return (modus == 'short') ? runde(zahl) : zahl;
+	};
+	var fields = [firstField, 'Unique Clients', 'Visits', 'CH-Visits', 'Use Time', 'Page Impressions'];
+	myHeadRow = $("<tr></tr>");
+	for (var f in fields) {
+	    myHeadRow.append('<th>'+fields[f]+'</th>');
+	}
+	$("#mainTable > thead").append(myHeadRow);
+	$("#datumsfeld").html('Net-Metrix Audit Oktober 2017');
+	
+    document.getElementById('file').onchange = function(){
+       var numberLength = $('input[name=numberlength]:checked', '#myForm').val();
+       var file = this.files[0];
+       var reader = new FileReader();
+       reader.onload = function(progressEvent){
+	      var parsedResult = $.csv.toObjects(this.result);
+	      for(var ln in parsedResult) {
+		     if (nmNames[parsedResult[ln][firstField]] == 1) {
+			    zelle1 = parsedResult[ln][firstField];
+				zelle2 = determineLength(parsedResult[ln]['Unique Clients'],numberLength);
+				zelle3 = determineLength(parsedResult[ln]['Visits'],numberLength);
+				zelle4 = parsedResult[ln]['CH-Visits'];
+				zelle5 = parsedResult[ln]['Use Time'];
+				zelle6 = determineLength(parsedResult[ln]['Page Impressions'],numberLength);
+				if (parsedResult[ln][firstField] == 'Newsnet D-CH' || parsedResult[ln][firstField] == 'Newsnet DCH' || parsedResult[ln][firstField] == 'NZZ-Netz' || parsedResult[ln][firstField] == 'audienzz - NZZ-Netz') {
+				   zelle6 = determineLength(zelle4,numberLength); zelle4 = '&nbsp;&mdash;&nbsp;'; zelle5 = zelle4;
+				}
+				$("#mainTable > tbody").append('<tr>'+wrapTD(zelle1)+wrapTD(zelle2,'numeric')+wrapTD(zelle3,'numeric')+wrapTD(zelle4,'numeric')+wrapTD(zelle5,'numeric')+wrapTD(zelle6,'numeric')+'</tr>');
+		     };
+          };
+	    };
+      reader.readAsText(file);
+      $("#infodiv").remove();
+	};
+  </script>
+  </body>
+</html>

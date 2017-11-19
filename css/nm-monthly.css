@@ -1,0 +1,34 @@
+body {
+       font-family:Arial,sans-serif;
+       padding-left:3em;
+       padding-top:1em;
+}
+
+table {
+       border-collapse: collapse;
+      }
+
+table, th, td {
+       border: 1px solid black;
+      }
+
+th, td {
+       padding:.2em;
+      }
+
+th    {
+       font-weight:bold;
+       text-align:center;
+      }
+
+.numeric {
+       text-align:right
+      }
+
+#datumsfeld {
+       color:#c00;
+      } 
+      
+#infodiv {
+       margin-bottom:1em;
+      } 
