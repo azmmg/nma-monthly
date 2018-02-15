@@ -73,7 +73,7 @@ function print_output_json($arr) {
   printf($json,join(",",$new_arr));
 };
 $row = 1;
-if (($handle = fopen("../csv/NMA_201711.csv", "r")) !== FALSE) {
+if (($handle = fopen("../csv/NMA_201801.csv", "r")) !== FALSE) {
    print "{";
     while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
      if (isset($nm_names[$data[0]])) {
