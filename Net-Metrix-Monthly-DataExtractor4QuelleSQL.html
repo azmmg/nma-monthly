@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="iso-8859-1">
+    <meta charset="utf-8">
 	<title>Javascript Text File Reader</title>
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/nm-monthly.css">
@@ -18,14 +18,12 @@
   <input type="file" name="file" id="file">
   </form>
   <p style="margin-top:1em">Dieses Skript liest aus dem CSV-File von <a href="http://netreport.net-metrix.ch/audit/">Net-Metrix Audit</a> die f&uuml;r den AZ-Monatsreport
-  relevanten Eintr&auml;ge heraus und stellt sie tabellarisch dar. Ganzzahlige Werte k&ouml;nnen lang oder in Millionen, auf zwei Nachkommastellen gerundet, angezeigt werden.
+  relevanten Eintr&auml;ge heraus und stellt sie als SQL-Statements dar. Ganzzahlige Werte k&ouml;nnen lang oder in Millionen, auf zwei Nachkommastellen gerundet, angezeigt werden.
   <br>
   <em>Wichtig:</em> Auf den Monat des CSV-Files achten!
   </p>
   </div>
-  <table id="mainTable">
-    <thead><tr><th colspan="8" id="datumsfeld">Monat Jahr</th></tr></thead>
-	<tbody></tbody>
+  <div id="mainDiv"></div>
   </table>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="js/jquery.csv-0.71.js"></script>
@@ -71,18 +69,49 @@
 'TeleM1.ch' : "B0",
 'tv24.ch' : "B0"
 };
+function trl_name(str) {
+var nameTrl = {
+"argovia.ch" : "Argovia",
+"Nordwestschweiz Netz" : "az Nordwestschweiz",
+"radio24.ch" : "Radio 24",
+"TeleBaern.tv" : "TeleBärn",
+"TeleM1.ch" : "TeleM1",
+"telezueri.ch" : "TeleZüri",
+"tv24.ch" : "TV24",
+"wildeisen.ch" : "Wildeisen's Kochen",
+"wireltern.ch" : "Wir Eltern",
+"20min.ch - D-CH"  : "20 min",
+"baslerzeitung.ch"  : "BAZ",
+"Blick Online"  : "Blick",
+"Bluewin"  : "Bluewin",
+"Der Landbote"  : "Der Landbote",
+"energy.ch"  : "Energy.ch",
+"familienleben.ch"  : "familienleben.ch",
+"FM1Today"  : "FM1 Today",
+"lemenu.ch"  : "lemenu.ch",
+"Luzerner Zeitung"  : "Neue Luzerner Zeitung",
+"luzernerzeitung.ch"  : "Neue Luzerner Zeitung",
+"Neue Zuercher Zeitung"  : "Neue Zürcher Zeitung",
+"Newsnet D-CH"  : "Newsnet DCH",
+"NZZ-Netz"  : "NZZ Netz",
+"radiopilatus.ch"  : "Radio Pilatus",
+"saison.ch"  : "saison.ch",
+"srf.ch"  : "srf",
+"St. Galler Tagblatt"  : "St. Galler Tagblatt",
+"tagesanzeiger.ch"  : "Tagesanzeiger",
+"tageswoche.ch"  : "Tageswoche",
+"watson.ch"  : "Watson",
+"zsz.ch"  : "ZSZ",
+"zuonline.ch"  : "Zuonline"};
+return (typeof nameTrl[str]=="undefined") ? str : nameTrl[str];
+}
+
     //var firstField = 'Websites Angebot';
     var firstField = 'Webangebote Angebot'; // ab 2016-09
 	function benchMark(p,tbl) {
         return tbl[p];
     };
-    const QUELLE = 'Net-Metrix Audit', JAHR = 2017, MONAT = 'Oktober';
-	function wrapTR(arr) {
-       return '<tr>'+arr.map(function(x){var cls=($.isNumeric(x) || x.match(/[0-9]?[0-9]:[0-9][0-9]:[0-9][0-9]/))?'numeric':'text';return '<td class="'+cls+'">'+x+'</td>';})+'</tr>';
-    };
-	function wrapTD(str,cssClass) {
-	   return (typeof(cssClass) == 'undefined') ? '<td>'+str+'</td>' : '<td class="'+cssClass+'">'+str+'</td>';
-	};
+    const QUELLE = 'Net-Metrix Audit', JAHR = 2017, MONAT = 'Dezember';
 	function createObj(z1,z2,z3,z4,z5,benchmark) {
 	    obj = {};
 		obj[z1] = [["Unique Clients", z1, QUELLE, JAHR, MONAT, benchmark, "IST", z2],
@@ -91,20 +120,23 @@
 		["Nutzungsdauer", z1, QUELLE, JAHR, MONAT, benchmark, "IST", z4]];
 		return obj;
     };
-	function determineLength(zahl,modus) {
+    function determineLength(zahl,modus) {
 	    return (modus == 'short') ? runde(zahl) : zahl;
-	};
+    };
+    function create_sql(data) {
+        console.log(data);
+        var sql ='UPDATE `azm`.`Quelle_2017` SET `Wert` = "'
+        +data[7]+'" WHERE `Quelle_2017`.`Kennzahl` = "'
+        +data[0]+'" AND `Quelle_2017`.`Portal` = "'
+        +data[1]+'" AND `Quelle_2017`.`Jahr` = "'
+        +data[3]+'" AND `Quelle_2017`.`Monat` = "'+data[4]+'";';
+        return '<div class="sqlrow">'+sql+'</div>';
+    };
+    
 	var fields = [firstField, 'Unique Clients', 'Visits', 'CH-Visits', 'Use Time', 'Page Impressions'];
-	/*
-	myHeadRow = $("<tr></tr>");
-	for (var f in fields) {
-	    myHeadRow.append('<th>'+fields[f]+'</th>');
-	}
-	$("#mainTable > thead").append(myHeadRow);*/
-	$("#mainTable > thead").append('<tr><th>Dimension</th><th>Portal</th><th>Quelle</th><th>Jahr</th><th>Monat</th><th>Benchmark</th><th>Soll/Ist</th><th>Wert</th></tr>');
 	$("#datumsfeld").html('Net-Metrix Audit Oktober 2017');
 	$("#document").ready(function(){
-	  //$("tr").mouseover(function(){});
+
       document.getElementById('file').onchange = function(){
         var numberLength = $('input[name=numberlength]:checked', '#myForm').val();
         var file = this.files[0];
@@ -113,7 +145,7 @@
 	      var parsedResult = $.csv.toObjects(this.result);
 	      for(var ln in parsedResult) {
 		     if (typeof nmNames[parsedResult[ln][firstField]] != "undefined") {
-			    zelle1 = parsedResult[ln][firstField];
+				zelle1 = trl_name(parsedResult[ln][firstField]);
 				zelle2 = determineLength(parsedResult[ln]['Unique Clients'],numberLength);
 				zelle3 = determineLength(parsedResult[ln]['Visits'],numberLength);
 				zelle4 = parsedResult[ln]['CH-Visits'];
@@ -131,7 +163,7 @@
 		  for (var a in accumulator) {
 		      for (var i=0;i<4;i++)
 		       //console.log(accumulator[a][Object.keys(accumulator[a])[0]][i]);
-		      $("#mainTable > tbody").append(wrapTR(accumulator[a][Object.keys(accumulator[a])[0]][i]));
+		      $("#mainDiv").append(create_sql(accumulator[a][Object.keys(accumulator[a])[0]][i]));
 		  };
 	    };
         reader.readAsText(file);

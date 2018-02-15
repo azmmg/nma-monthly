@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <meta charset="iso-8859-1">
+	<title>Javascript Text File Reader</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/nm-monthly.css">
+	<style>
+	  em {font-size:120%;font-weight:bold;color:red}
+	</style>
+  </head>
+  <body>
+<table id="mainTable">
+<thead>
+<tr><th colspan="8" id="datumsfeld">Net-Metrix Audit Dezember 2016</th></tr>
+<tr><th>Webangebote Angebot</th><th>Unique Clients</th><th>Visits</th><th>CH-Visits</th><th>Use Time</th><th>Page Impressions</th></tr>
+</thead>
+<tbody>
+<tr><td>20min.ch - D-CH</td><td class="numeric">4658000</td><td class="numeric">83168433</td><td class="numeric">90-94%</td><td class="numeric">0:07:02</td><td class="numeric">943062531</td></tr>
+<tr><td>argovia.ch</td><td class="numeric">34000</td><td class="numeric">118893</td><td class="numeric">90-94%</td><td class="numeric">0:04:14</td><td class="numeric">265406</td></tr>
+<tr><td>baslerzeitung.ch</td><td class="numeric">540000</td><td class="numeric">3747897</td><td class="numeric">75-79%</td><td class="numeric">0:05:37</td><td class="numeric">19307056</td></tr>
+<tr><td>Blick Online</td><td class="numeric">4436000</td><td class="numeric">58936040</td><td class="numeric">85-89%</td><td class="numeric">0:05:57</td><td class="numeric">735698735</td></tr>
+<tr><td>Bluewin</td><td class="numeric">2774000</td><td class="numeric">36735800</td><td class="numeric">90-94%</td><td class="numeric">0:08:21</td><td class="numeric">222123772</td></tr>
+<tr><td>Der Landbote</td><td class="numeric">77000</td><td class="numeric">161404</td><td class="numeric">80-84%</td><td class="numeric">0:02:57</td><td class="numeric">453762</td></tr>
+<tr><td>energy.ch</td><td class="numeric">272000</td><td class="numeric">1776172</td><td class="numeric">90-94%</td><td class="numeric">0:06:04</td><td class="numeric">7638281</td></tr>
+<tr><td>familienleben.ch</td><td class="numeric">327000</td><td class="numeric">460964</td><td class="numeric">60-64%</td><td class="numeric">0:02:30</td><td class="numeric">900970</td></tr>
+<tr><td>FM1Today</td><td class="numeric">197000</td><td class="numeric">859782</td><td class="numeric">90-94%</td><td class="numeric">0:03:25</td><td class="numeric">2900378</td></tr>
+<tr><td>lemenu.ch</td><td class="numeric">31000</td><td class="numeric">50875</td><td class="numeric">90-94%</td><td class="numeric">0:04:15</td><td class="numeric">239925</td></tr>
+<tr><td>Luzerner Zeitung</td><td class="numeric">524000</td><td class="numeric">2963005</td><td class="numeric">90-94%</td><td class="numeric">0:04:26</td><td class="numeric">11656809</td></tr>
+<tr><td>Neue Zuercher Zeitung</td><td class="numeric">2289000</td><td class="numeric">10699757</td><td class="numeric">60-64%</td><td class="numeric">0:04:54</td><td class="numeric">39410525</td></tr>
+<tr><td>Nordwestschweiz Netz</td><td class="numeric">1053000</td><td class="numeric">4641171</td><td class="numeric">85-89%</td><td class="numeric">0:04:55</td><td class="numeric">23640122</td></tr>
+<tr><td>radio24.ch</td><td class="numeric">34000</td><td class="numeric">145320</td><td class="numeric">90-94%</td><td class="numeric">0:05:23</td><td class="numeric">365617</td></tr>
+<tr><td>radiopilatus.ch</td><td class="numeric">107000</td><td class="numeric">248586</td><td class="numeric">90-94%</td><td class="numeric">0:03:25</td><td class="numeric">449168</td></tr>
+<tr><td>saison.ch</td><td class="numeric">475000</td><td class="numeric">819507</td><td class="numeric">80-84%</td><td class="numeric">0:02:50</td><td class="numeric">1643107</td></tr>
+<tr><td>srf.ch</td><td class="numeric">4245000</td><td class="numeric">29908017</td><td class="numeric">90-94%</td><td class="numeric">0:06:17</td><td class="numeric">114709057</td></tr>
+<tr><td>St. Galler Tagblatt</td><td class="numeric">493000</td><td class="numeric">1952567</td><td class="numeric">85-89%</td><td class="numeric">0:04:16</td><td class="numeric">8657806</td></tr>
+<tr><td>swissmom.ch</td><td class="numeric">316000</td><td class="numeric">820379</td><td class="numeric">75-79%</td><td class="numeric">0:04:40</td><td class="numeric">2906553</td></tr>
+<tr><td>tagesanzeiger.ch</td><td class="numeric">2418000</td><td class="numeric">16230843</td><td class="numeric">80-84%</td><td class="numeric">0:05:51</td><td class="numeric">78614710</td></tr>
+<tr><td>tageswoche.ch</td><td class="numeric">238000</td><td class="numeric">748077</td><td class="numeric">85-89%</td><td class="numeric">0:04:32</td><td class="numeric">1646109</td></tr>
+<tr><td>TeleBaern.tv</td><td class="numeric">23000</td><td class="numeric">35750</td><td class="numeric">90-94%</td><td class="numeric">0:04:07</td><td class="numeric">72572</td></tr>
+<tr><td>TeleM1.ch</td><td class="numeric">30000</td><td class="numeric">53019</td><td class="numeric">90-94%</td><td class="numeric">0:04:10</td><td class="numeric">121132</td></tr>
+<tr><td>telezueri.ch</td><td class="numeric">121000</td><td class="numeric">233570</td><td class="numeric">85-89%</td><td class="numeric">0:05:23</td><td class="numeric">492345</td></tr>
+<tr><td>tv24.ch</td><td class="numeric">14000</td><td class="numeric">20559</td><td class="numeric">75-79%</td><td class="numeric">0:02:32</td><td class="numeric">48032</td></tr>
+<tr><td>watson.ch</td><td class="numeric">1162000</td><td class="numeric">8388922</td><td class="numeric">80-84%</td><td class="numeric">0:05:36</td><td class="numeric">76118116</td></tr>
+<tr><td>wildeisen.ch</td><td class="numeric">444000</td><td class="numeric">887930</td><td class="numeric">90-94%</td><td class="numeric">0:03:14</td><td class="numeric">3046364</td></tr>
+<tr><td>wireltern.ch</td><td class="numeric">133000</td><td class="numeric">178978</td><td class="numeric">80-84%</td><td class="numeric">0:02:23</td><td class="numeric">376344</td></tr>
+<tr><td>zsz.ch</td><td class="numeric">68000</td><td class="numeric">152938</td><td class="numeric">80-84%</td><td class="numeric">0:03:04</td><td class="numeric">379144</td></tr>
+<tr><td>zuonline.ch</td><td class="numeric">47000</td><td class="numeric">96613</td><td class="numeric">75-79%</td><td class="numeric">0:02:22</td><td class="numeric">231222</td></tr>
+<tr><td>Newsnet DCH</td><td class="numeric">3'378'000</td><td class="numeric">24593845</td><td class="numeric">&nbsp;—&nbsp;</td><td class="numeric">&nbsp;—&nbsp;</td><td class="numeric">123284316</td></tr>
+<tr><td>NZZ-Netz</td><td class="numeric">3710000</td><td class="numeric">20132000</td><td class="numeric">&nbsp;—&nbsp;</td><td class="numeric">&nbsp;—&nbsp;</td><td class="numeric">86265640</td></tr>
+</tbody>
+  </table>
+</body>
+</html>
