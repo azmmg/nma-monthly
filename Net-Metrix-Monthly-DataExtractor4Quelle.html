@@ -76,7 +76,7 @@
 	function benchMark(p,tbl) {
         return tbl[p];
     };
-    const QUELLE = 'Net-Metrix Audit', JAHR = 2017, MONAT = 'Oktober';
+    const QUELLE = 'Net-Metrix Audit', JAHR = 2018, MONAT = 'Februar';
 	function wrapTR(arr) {
        return '<tr>'+arr.map(function(x){var cls=($.isNumeric(x) || x.match(/[0-9]?[0-9]:[0-9][0-9]:[0-9][0-9]/))?'numeric':'text';return '<td class="'+cls+'">'+x+'</td>';})+'</tr>';
     };
@@ -102,7 +102,7 @@
 	}
 	$("#mainTable > thead").append(myHeadRow);*/
 	$("#mainTable > thead").append('<tr><th>Dimension</th><th>Portal</th><th>Quelle</th><th>Jahr</th><th>Monat</th><th>Benchmark</th><th>Soll/Ist</th><th>Wert</th></tr>');
-	$("#datumsfeld").html('Net-Metrix Audit Oktober 2017');
+	$("#datumsfeld").html('Net-Metrix Audit '+MONAT+' '+JAHR);
 	$("#document").ready(function(){
 	  //$("tr").mouseover(function(){});
       document.getElementById('file').onchange = function(){
