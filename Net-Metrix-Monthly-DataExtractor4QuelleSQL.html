@@ -111,7 +111,7 @@ return (typeof nameTrl[str]=="undefined") ? str : nameTrl[str];
 	function benchMark(p,tbl) {
         return tbl[p];
     };
-    const QUELLE = 'Net-Metrix Audit', JAHR = 2017, MONAT = 'Dezember';
+    const QUELLE = 'Net-Metrix Audit', JAHR = 2018, MONAT = 'Februar';
 	function createObj(z1,z2,z3,z4,z5,benchmark) {
 	    obj = {};
 		obj[z1] = [["Unique Clients", z1, QUELLE, JAHR, MONAT, benchmark, "IST", z2],
@@ -125,16 +125,16 @@ return (typeof nameTrl[str]=="undefined") ? str : nameTrl[str];
     };
     function create_sql(data) {
         console.log(data);
-        var sql ='UPDATE `azm`.`Quelle_2017` SET `Wert` = "'
-        +data[7]+'" WHERE `Quelle_2017`.`Kennzahl` = "'
-        +data[0]+'" AND `Quelle_2017`.`Portal` = "'
-        +data[1]+'" AND `Quelle_2017`.`Jahr` = "'
-        +data[3]+'" AND `Quelle_2017`.`Monat` = "'+data[4]+'";';
+        var sql ='UPDATE `azm`.`Quelle_'+JAHR+'` SET `Wert` = "'
+        +data[7]+'" WHERE `Quelle_'+JAHR+'`.`Kennzahl` = "'
+        +data[0]+'" AND `Quelle_'+JAHR+'`.`Portal` = "'
+        +data[1]+'" AND `Quelle_'+JAHR+'`.`Jahr` = "'
+        +data[3]+'" AND `Quelle_'+JAHR+'`.`Monat` = "'+data[4]+'";';
         return '<div class="sqlrow">'+sql+'</div>';
     };
     
 	var fields = [firstField, 'Unique Clients', 'Visits', 'CH-Visits', 'Use Time', 'Page Impressions'];
-	$("#datumsfeld").html('Net-Metrix Audit Oktober 2017');
+	$("#datumsfeld").html('Net-Metrix Audit '+MONAT+' '+JAHR);
 	$("#document").ready(function(){
 
       document.getElementById('file').onchange = function(){

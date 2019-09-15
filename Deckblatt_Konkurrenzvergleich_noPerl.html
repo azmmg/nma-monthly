@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Deckblatt: Konkurrenzvergleich Juni 2019</title>
+<style>
+  body {font-family:Arial; font-size:11pt}
+  table  {border-collapse: collapse;}
+  tr, td, th {border:1px solid #bbb}
+.rowhead {padding:3px;padding-right:6px; font-weight:bold; font-size:12pt;}
+.datacol {width:4.6em; font-size:10.5pt;}
+.colgrphead {background-color:#eee}
+.rownr {font-weight:normal;text-align:right;padding-right:2px;}
+.datacell {text-align:right}
+.numeric {text-align:right}
+code {color:#852}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="nma-data.js"></script>
+</head>
+<body>
+<div id="infodiv">
+  <h1>Leeres Template für das Deckblatt Konkurrenzvergleich des Monatsreports</h1>
+  <p>Die Variable <code>data</code> muss mit dem Output von <code>perl/konkurrenzvergleich_html.pl > tmp.txt</code> aktualisiert werden.</p>
+</div>
+<table id="maintable">
+<thead>
+<tr><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th><th>M</th><th>N</th></tr>
+<tr><th>&nbsp;</th><th class="colgrphead" colspan="3">Unique Clients</th><th class="colgrphead" colspan="3">Visits</th><th class="colgrphead" colspan="3">Page Impressionss</th><th>&nbsp;</th><th class="colgrphead" colspan="2">Ratios</th><th>&nbsp;</th></tr>
+<tr><th>&nbsp;</th><th class="datacol">2018</th><th class="datacol">2019</th><th class="datacol">%YOY</th><th class="datacol">2018</th><th class="datacol">2019</th><th class="datacol">%YOY</th><th class="datacol">2018</th><th class="datacol">2019</th><th class="datacol">%YOY</th><th>&nbsp;</th><th class="datacol">Visits/UC</th><th class="datacol">PIs/Visit</th><th>Rank</th></tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<script>
+  const getCellValue = (obj,prop,ndx) => {
+    console.log(obj);
+    return (typeof obj[prop] == "undefined") ? '-' : obj[prop][ndx];
+  }
+  const insertData = (obj,row) => {
+    return `<td class="numeric">${getCellValue(obj,2018,3)}</td>
+            <td class="numeric">${getCellValue(obj,2019,3)}</td>
+            <td>=C${row}/B${row}-1</td>
+            <td class="numeric">${getCellValue(obj,2018,4)}</td>
+            <td class="numeric">${getCellValue(obj,2019,4)}</td>
+            <td>=F${row}/E${row}-1</td>
+            <td class="numeric">${getCellValue(obj,2018,7)}</td>
+            <td class="numeric">${getCellValue(obj,2019,7)}</td>
+            <td>=I${row}/H${row}-1</td>
+            <td>&nbsp;</td>
+            <td>=F${row}/C${row}</td>
+            <td>=I${row}/F${row}</td>
+            <td>${obj["rank"]}</td>
+            `;
+  }
+  /* nur für Optik */
+  $("document").ready(function() {
+    let data = {};
+    let fieldNames = nmaCSV.shift();
+    console.log(fieldNames);
+    for (let i=0;i<nmaCSV.length;i++) {
+       let rank = (typeof nmaNames[nmaKeys[nmaCSV[i][2]]] == "undefined") ? "999" : nmaNames[nmaKeys[nmaCSV[i][2]]];
+       data[nmaCSV[i][2]] = (typeof data[nmaCSV[i][2]]=="undefined") ? {"rank" : rank} : data[nmaCSV[i][2]];
+       data[nmaCSV[i][2]][nmaCSV[i][0]] = nmaCSV[i];
+    }
+    console.log(data);
+    let colIndex = {
+     "0" : "Row",
+     "1" : "A",
+     "2" : "B",
+     "3" : "C",
+     "4" : "D",
+     "5" : "E",
+     "6" : "F",
+     "7" : "G",
+     "8" : "H",
+     "9" : "I",
+     "10" : "J",
+     "11" : "K",
+     "12" : "L",
+     "13" : "M",
+     "14" : "N",
+    };
+    let row = 4;
+    for (site in data) {
+      row++;
+      $("#maintable > tbody").append(`<tr><td>${nmaKeys[site]}</td>${insertData(data[site],row)}</tr>`);
+    }
+  });
+</script>
+</body>
+</html>

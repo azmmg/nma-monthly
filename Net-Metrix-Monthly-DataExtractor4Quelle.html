@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
   <head>
@@ -33,7 +34,6 @@
   <script src="js/underscore-min.js"></script>
   <script>
   var accumulator = [];
-  // Der Inhalt von nmNames ist auch online via https://api.myjson.com/bins/eocfb abrufbar
   var nmNames = {
 '20min.ch - D-CH' : "B1",
 'Blick Online' : "B1",
@@ -72,11 +72,12 @@
 'tv24.ch' : "B0"
 };
     //var firstField = 'Websites Angebot';
-    var firstField = 'Webangebote Angebot'; // ab 2016-09
-	function benchMark(p,tbl) {
+    //var firstField = 'Webangebote Angebot'; // ab 2016-09
+    var firstField = 'Angebote Angebot'; // ab 2018-11
+    function benchMark(p,tbl) {
         return tbl[p];
     };
-    const QUELLE = 'Net-Metrix Audit', JAHR = 2018, MONAT = 'Februar';
+    const QUELLE = 'Net-Metrix Audit', JAHR = 2018, MONAT = 'Oktober';
 	function wrapTR(arr) {
        return '<tr>'+arr.map(function(x){var cls=($.isNumeric(x) || x.match(/[0-9]?[0-9]:[0-9][0-9]:[0-9][0-9]/))?'numeric':'text';return '<td class="'+cls+'">'+x+'</td>';})+'</tr>';
     };
@@ -102,7 +103,7 @@
 	}
 	$("#mainTable > thead").append(myHeadRow);*/
 	$("#mainTable > thead").append('<tr><th>Dimension</th><th>Portal</th><th>Quelle</th><th>Jahr</th><th>Monat</th><th>Benchmark</th><th>Soll/Ist</th><th>Wert</th></tr>');
-	$("#datumsfeld").html('Net-Metrix Audit '+MONAT+' '+JAHR);
+	$("#datumsfeld").html('Net-Metrix Audit '+MONAT+' '+JAHR+'');
 	$("#document").ready(function(){
 	  //$("tr").mouseover(function(){});
       document.getElementById('file').onchange = function(){
